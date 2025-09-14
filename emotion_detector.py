@@ -1,3 +1,9 @@
+# Installs:
+# pip install opencv-python
+# pip install deepface
+# pip install numpy
+# pip install tensorflow
+
 import cv2
 from deepface import DeepFace
 import numpy as np
@@ -20,11 +26,11 @@ def main():
     print("Press 'l' to toggle landmarks")
     
     frame_count = 0
-    current_emotion = "Detecting..."
+    current_emotion = "Detecting"
     show_landmarks = False
     last_face_region = None
     
-    # Emotion smoothing, without this, emotion is jittery
+    # Emotion selection from most recent, without this, emotion is jittery
     emotion_history = deque(maxlen=5)  # Keep last 5 emotion readings
     emotion_confidence_threshold = 40.0  # Only accept emotions above this confidence
     
@@ -110,7 +116,6 @@ def main():
             # Extract face region for eye detection
             face_roi = frame[y:y+h, x:x+w]
             gray_roi = cv2.cvtColor(face_roi, cv2.COLOR_BGR2GRAY)
-            
             
             # Feature points
             # Detect eyes
